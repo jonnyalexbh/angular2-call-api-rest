@@ -2,7 +2,6 @@
 * importar el núcleo de Angular
 */
 import {Component} from 'angular2/core';
-import {RestaurantsListComponent} from './components/restaurants-list.component';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Router} from 'angular2/router';  // route
 
@@ -13,13 +12,12 @@ import {ROUTER_DIRECTIVES, RouteConfig, Router} from 'angular2/router';  // rout
 * atributos de la clase AppComponent
 */
 @Component({
-  selector: 'my-app',
-  templateUrl:"app/views/index.html",
-  directives: [RestaurantsListComponent, ROUTER_DIRECTIVES]
+  selector: 'restaurants-list',
+  templateUrl:"app/views/restaurants-list.html"
 })
 /*
 * exportamos la clase para que el componente este disponible
 */
-export class AppComponent {
-  public title:string = "Restaurants";
+export class RestaurantsListComponent {
+  public title:string = "Restaurant list:";
 }

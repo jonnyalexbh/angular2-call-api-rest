@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./components/restaurants-list.component", "angular2/router"], function (exports_1, context_1) {
+System.register(["angular2/core"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,47 +7,40 @@ System.register(["angular2/core", "./components/restaurants-list.component", "an
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, restaurants_list_component_1, router_1, AppComponent;
+    var core_1, RestaurantsListComponent;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (restaurants_list_component_1_1) {
-                restaurants_list_component_1 = restaurants_list_component_1_1;
-            },
-            function (router_1_1) {
-                router_1 = router_1_1;
             }
         ],
         execute: function () {
             /*
             * exportamos la clase para que el componente este disponible
             */
-            AppComponent = (function () {
+            RestaurantsListComponent = (function () {
                 /*
                 * decorador component indicamos el selector donde cargar la
                 * plantilla y definimos el html de la plantilla. Utilizamos las
                 * dobles llaves para mostrar el valor de las propiedades o
                 * atributos de la clase AppComponent
                 */
-                function AppComponent() {
-                    this.title = "Restaurants";
+                function RestaurantsListComponent() {
+                    this.title = "Restaurant list:";
                 }
-                return AppComponent;
+                return RestaurantsListComponent;
             }());
-            AppComponent = __decorate([
+            RestaurantsListComponent = __decorate([
                 core_1.Component({
-                    selector: 'my-app',
-                    templateUrl: "app/views/index.html",
-                    directives: [restaurants_list_component_1.RestaurantsListComponent, router_1.ROUTER_DIRECTIVES]
+                    selector: 'restaurants-list',
+                    templateUrl: "app/views/restaurants-list.html"
                 })
                 /*
                 * exportamos la clase para que el componente este disponible
                 */
-            ], AppComponent);
-            exports_1("AppComponent", AppComponent);
+            ], RestaurantsListComponent);
+            exports_1("RestaurantsListComponent", RestaurantsListComponent);
         }
     };
 });
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=restaurants-list.component.js.map
