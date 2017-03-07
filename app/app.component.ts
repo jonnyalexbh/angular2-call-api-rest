@@ -20,5 +20,5 @@ import {ROUTER_DIRECTIVES, RouteConfig, Router} from 'angular2/router';  // rout
 * exportamos la clase para que el componente este disponible
 */
 export class AppComponent {
-  public title:string = "restaurants with angular 2";
+  public title:string = "Restaurants";
 }

@@ -29,7 +29,7 @@ System.register(["angular2/core", "angular2/router"], function (exports_1, conte
                 * atributos de la clase AppComponent
                 */
                 function AppComponent() {
-                    this.title = "restaurants with angular 2";
+                    this.title = "Restaurants";
                 }
                 return AppComponent;
             }());
