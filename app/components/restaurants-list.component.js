@@ -35,6 +35,8 @@ System.register(["angular2/core", "../services/restaurant.service"], function (e
                 };
                 RestaurantsListComponent.prototype.getRestaurants = function () {
                     var _this = this;
+                    var box_restaurantes = document.querySelector("#restaurants-list .loading");
+                    box_restaurantes.style.visibility = "visible";
                     this._restaurantService.getRestaurants()
                         .subscribe(function (result) {
                         _this.restaurants = result.data,
@@ -42,6 +44,7 @@ System.register(["angular2/core", "../services/restaurant.service"], function (e
                         if (_this.status !== "success") {
                             alert("Server error");
                         }
+                        box_restaurantes.style.display = "none";
                     }, function (error) {
                         _this.errorMessage = error;
                         if (_this.errorMessage !== null) {

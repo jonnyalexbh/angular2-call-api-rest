@@ -37,6 +37,9 @@ export class RestaurantsListComponent {
   }
 
   getRestaurants(){
+    let box_restaurantes = <HTMLElement>document.querySelector("#restaurants-list .loading");
+    box_restaurantes.style.visibility = "visible";
+
     this._restaurantService.getRestaurants()
     .subscribe(
       result => {
@@ -46,6 +49,8 @@ export class RestaurantsListComponent {
         if(this.status !== "success"){
           alert("Server error");
         }
+
+        box_restaurantes.style.display = "none";
 
       },
       error => {

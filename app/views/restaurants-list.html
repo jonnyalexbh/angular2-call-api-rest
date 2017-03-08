@@ -1,6 +1,9 @@
 <h1>{{title}}</h1>
 
 <ul id="restaurants-list">
+  <li class="loading">
+    <img src="../../assets/images/loader.gif" alt="">
+  </li>
   <li *ngFor="#row of restaurants" class="restaurant-item">
     <div class="image"></div>
     <div class="data">
