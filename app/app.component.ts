@@ -3,6 +3,7 @@
 */
 import {Component} from 'angular2/core';
 import {RestaurantsListComponent} from './components/restaurants-list.component';
+import {RestaurantDetailComponent} from './components/restaurant-detail.component';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Router} from 'angular2/router';  // route
 
@@ -15,8 +16,15 @@ import {ROUTER_DIRECTIVES, RouteConfig, Router} from 'angular2/router';  // rout
 @Component({
   selector: 'my-app',
   templateUrl:"app/views/index.html",
-  directives: [RestaurantsListComponent, ROUTER_DIRECTIVES]
+  directives: [RestaurantsListComponent, RestaurantDetailComponent, ROUTER_DIRECTIVES]
 })
+/*
+* route
+*/
+@RouteConfig([
+  {path: '/', name: "Restaurants", component: RestaurantsListComponent, useAsDefault: true},
+  {path: '/restaurant/:id', name: "Restaurant", component: RestaurantDetailComponent}
+])
 /*
 * exportamos la clase para que el componente este disponible
 */

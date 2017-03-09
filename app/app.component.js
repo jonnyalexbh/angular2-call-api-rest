@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./components/restaurants-list.component", "angular2/router"], function (exports_1, context_1) {
+System.register(["angular2/core", "./components/restaurants-list.component", "./components/restaurant-detail.component", "angular2/router"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["angular2/core", "./components/restaurants-list.component", "an
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, restaurants_list_component_1, router_1, AppComponent;
+    var core_1, restaurants_list_component_1, restaurant_detail_component_1, router_1, AppComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -15,6 +15,9 @@ System.register(["angular2/core", "./components/restaurants-list.component", "an
             },
             function (restaurants_list_component_1_1) {
                 restaurants_list_component_1 = restaurants_list_component_1_1;
+            },
+            function (restaurant_detail_component_1_1) {
+                restaurant_detail_component_1 = restaurant_detail_component_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -40,8 +43,16 @@ System.register(["angular2/core", "./components/restaurants-list.component", "an
                 core_1.Component({
                     selector: 'my-app',
                     templateUrl: "app/views/index.html",
-                    directives: [restaurants_list_component_1.RestaurantsListComponent, router_1.ROUTER_DIRECTIVES]
+                    directives: [restaurants_list_component_1.RestaurantsListComponent, restaurant_detail_component_1.RestaurantDetailComponent, router_1.ROUTER_DIRECTIVES]
                 })
+                /*
+                * route
+                */
+                ,
+                router_1.RouteConfig([
+                    { path: '/', name: "Restaurants", component: restaurants_list_component_1.RestaurantsListComponent, useAsDefault: true },
+                    { path: '/restaurant/:id', name: "Restaurant", component: restaurant_detail_component_1.RestaurantDetailComponent }
+                ])
                 /*
                 * exportamos la clase para que el componente este disponible
                 */

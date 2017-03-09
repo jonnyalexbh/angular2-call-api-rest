@@ -10,7 +10,7 @@
       <h4>{{row.nombre}}</h4>
       <p>{{row.direccion}}</p>
       <p>
-        <a href="#" class="btn btn-show">Show</a>
+        <a [routerLink]="['Restaurant', {id: row.id}]" class="btn btn-show">Show</a>
         <a href="#" class="btn btn-edit">Edit</a>
         <a href="#" class="btn btn-delete">Delete</a>
       </p>

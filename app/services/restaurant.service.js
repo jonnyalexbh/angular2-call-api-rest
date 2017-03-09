@@ -34,6 +34,13 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
                     return this._http.get("http://localhost/api-rest-slim/restaurantes-api.php/restaurantes")
                         .map(function (res) { return res.json(); });
                 };
+                /*
+                * getRestaurant
+                */
+                RestaurantService.prototype.getRestaurant = function (id) {
+                    return this._http.get("http://localhost/api-rest-slim/restaurantes-api.php/restaurante/" + id)
+                        .map(function (res) { return res.json(); });
+                };
                 return RestaurantService;
             }());
             RestaurantService = __decorate([

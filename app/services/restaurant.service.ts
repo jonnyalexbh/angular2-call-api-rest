@@ -15,5 +15,11 @@ export class RestaurantService{
     return this._http.get("http://localhost/api-rest-slim/restaurantes-api.php/restaurantes")
     .map(res => res.json());
   }
-
+  /*
+  * getRestaurant
+  */
+  getRestaurant(id: string){
+    return this._http.get("http://localhost/api-rest-slim/restaurantes-api.php/restaurante/"+id)
+    .map(res => res.json());
+  }
 }

@@ -5,7 +5,7 @@ import {Component, OnInit} from 'angular2/core';
 import {RestaurantService} from '../services/restaurant.service'; // load RestaurantService
 import {Restaurant} from '../model/restaurant';
 
-import {ROUTER_DIRECTIVES, RouteConfig, Router} from 'angular2/router';  // route
+import {RouteParams} from 'angular2/router';  // load RouteParams
 
 /*
 * decorador component indicamos el selector donde cargar la
@@ -14,44 +14,46 @@ import {ROUTER_DIRECTIVES, RouteConfig, Router} from 'angular2/router';  // rout
 * atributos de la clase AppComponent
 */
 @Component({
-  selector: 'restaurants-list',
-  templateUrl:"app/views/restaurants-list.html",
-  providers:[RestaurantService],
-  directives: [ROUTER_DIRECTIVES]
+  templateUrl:"app/views/restaurant-detail.html",
+  providers:[RestaurantService]
 })
 /*
 * exportamos la clase para que el componente este disponible
 */
-export class RestaurantsListComponent {
-  public title:string = "Restaurant list:";
-  public restaurants:Restaurant[];
+export class RestaurantDetailComponent implements OnInit {
+
+  public parameter;
+  public restaurant:Restaurant;
   public status: string;
   public errorMessage;
-
-  constructor(private _restaurantService:RestaurantService){
-
+  /*
+  * constructor
+  */
+  constructor(
+    private _restaurantService:RestaurantService,
+    private _routeParams: RouteParams
+  ){}
+  /*
+  * ngOnInit
+  */
+  ngOnInit(){
+    this.parameter = this._routeParams.get("id");
+    this.getRestaurant();
   }
-
-  ngOnInit() {
-    this.getRestaurants();
-    console.log("RestaurantesListComponent cargado");
-  }
-
-  getRestaurants(){
-    let box_restaurantes = <HTMLElement>document.querySelector("#restaurants-list .loading");
-    box_restaurantes.style.visibility = "visible";
-
-    this._restaurantService.getRestaurants()
+  /*
+  * getRestaurant
+  */
+  getRestaurant(){
+    let id = this._routeParams.get("id");
+    this._restaurantService.getRestaurant(id)
     .subscribe(
-      result => {
-        this.restaurants = result.data,
-        this.status = result.status
+      response => {
+        this.restaurant = response.data;
+        this.status = response.status;
 
         if(this.status !== "success"){
           alert("Server error");
         }
-
-        box_restaurantes.style.display = "none";
 
       },
       error => {
@@ -63,8 +65,6 @@ export class RestaurantsListComponent {
         }
 
       }
-
     );
   }
-
 }
