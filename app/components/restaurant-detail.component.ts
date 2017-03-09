@@ -22,7 +22,6 @@ import {RouteParams} from 'angular2/router';  // load RouteParams
 */
 export class RestaurantDetailComponent implements OnInit {
 
-  public parameter;
   public restaurant:Restaurant;
   public status: string;
   public errorMessage;
@@ -37,7 +36,6 @@ export class RestaurantDetailComponent implements OnInit {
   * ngOnInit
   */
   ngOnInit(){
-    this.parameter = this._routeParams.get("id");
     this.getRestaurant();
   }
   /*

@@ -1,1 +1,12 @@
-<h1>detail restaurant {{parameter}}</h1>
+<div *ngIf="restaurant" class="restaurant-box">
+  <h1>restaurant: {{restaurant.nombre}}</h1>
+  <p class="price">
+    <span [ngSwitch]="restaurant.precio">
+      <span *ngSwitchWhen="'low'">between 1000 and 20.000</span>
+      <span *ngSwitchWhen="'normal'">between 20.000 and 50.000</span>
+      <span *ngSwitchWhen="'high'">between 50.000 and 100.000</span>
+    </span>
+  </p>
+  <p class="address">{{restaurant.direccion}}</p>
+  <p class="description">{{restaurant.descripcion}}</p>
+</div>

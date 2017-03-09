@@ -39,7 +39,6 @@ System.register(["angular2/core", "../services/restaurant.service", "angular2/ro
                 * ngOnInit
                 */
                 RestaurantDetailComponent.prototype.ngOnInit = function () {
-                    this.parameter = this._routeParams.get("id");
                     this.getRestaurant();
                 };
                 /*
