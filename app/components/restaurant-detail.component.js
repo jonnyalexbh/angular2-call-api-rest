@@ -31,9 +31,10 @@ System.register(["angular2/core", "../services/restaurant.service", "angular2/ro
                 /*
                 * constructor
                 */
-                function RestaurantDetailComponent(_restaurantService, _routeParams) {
+                function RestaurantDetailComponent(_restaurantService, _routeParams, _router) {
                     this._restaurantService = _restaurantService;
                     this._routeParams = _routeParams;
+                    this._router = _router;
                 }
                 /*
                 * ngOnInit
@@ -52,7 +53,8 @@ System.register(["angular2/core", "../services/restaurant.service", "angular2/ro
                         _this.restaurant = response.data;
                         _this.status = response.status;
                         if (_this.status !== "success") {
-                            alert("Server error");
+                            // alert("Server error");
+                            _this._router.navigate(["Restaurants"]);
                         }
                     }, function (error) {
                         _this.errorMessage = error;
@@ -74,7 +76,8 @@ System.register(["angular2/core", "../services/restaurant.service", "angular2/ro
                 */
                 ,
                 __metadata("design:paramtypes", [restaurant_service_1.RestaurantService,
-                    router_1.RouteParams])
+                    router_1.RouteParams,
+                    router_1.Router])
             ], RestaurantDetailComponent);
             exports_1("RestaurantDetailComponent", RestaurantDetailComponent);
         }

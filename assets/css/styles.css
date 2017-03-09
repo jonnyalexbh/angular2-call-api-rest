@@ -116,3 +116,17 @@ header h1{
   list-style: none;
   text-decoration: none;
 }
+
+.restaurant-box .price{
+  color: white;
+  background: #087d26;
+  font-size: 14px;
+  padding: 5px;
+  box-shadow: 2px 2px #087d26;
+  text-align: center;
+  width: 200px;
+}
+
+.restaurant-box .address{
+  color: gray;
+}

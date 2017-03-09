@@ -5,7 +5,7 @@ import {Component, OnInit} from 'angular2/core';
 import {RestaurantService} from '../services/restaurant.service'; // load RestaurantService
 import {Restaurant} from '../model/restaurant';
 
-import {RouteParams} from 'angular2/router';  // load RouteParams
+import {Router, RouteParams} from 'angular2/router';  // load RouteParams
 
 /*
 * decorador component indicamos el selector donde cargar la
@@ -30,7 +30,8 @@ export class RestaurantDetailComponent implements OnInit {
   */
   constructor(
     private _restaurantService:RestaurantService,
-    private _routeParams: RouteParams
+    private _routeParams: RouteParams,
+    private _router: Router
   ){}
   /*
   * ngOnInit
@@ -50,7 +51,8 @@ export class RestaurantDetailComponent implements OnInit {
         this.status = response.status;
 
         if(this.status !== "success"){
-          alert("Server error");
+          // alert("Server error");
+          this._router.navigate(["Restaurants"]);
         }
 
       },
