@@ -1,0 +1,28 @@
+<h1>Add new restaurant</h1>
+
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+  <label>Name:</label>
+  <p>
+    <input type="text" #name="ngForm" ngControl="name" [(ngModel)]="restaurant.name" required/>
+    <span *ngIf="!name.valid">Name is required</span>
+  </p>
+  <label>Address:</label>
+  <p>
+    <input type="text" #address="ngForm" ngControl="address" [(ngModel)]="restaurant.address" required/>
+    <span *ngIf="!address.valid">Address is required</span>
+  </p>
+  <label>Description:</label>
+  <p>
+    <textarea #description="ngForm" ngControl="description" [(ngModel)]="restaurant.description" required rows="8" cols="80"></textarea>
+    <span *ngIf="!description.valid">Description is required</span>
+  </p>
+  <label>Price:</label>
+  <p>
+    <select #price>
+      <option value="bajo">small</option>
+      <option value="normal">normal</option>
+      <option value="alto">high</option>
+    </select>
+  </p>
+  <input type="submit" value="add movie" [disabled]="!myForm.form.valid">
+</form>
