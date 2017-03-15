@@ -20,8 +20,8 @@ import {Router, RouteParams} from 'angular2/router';  // load RouteParams
 /*
 * exportamos la clase para que el componente este disponible
 */
-export class RestaurantAddComponent implements OnInit {
-  public title = "Add restaurant";
+export class RestaurantEditComponent implements OnInit {
+  public title = "Edit restaurant";
   public restaurant:Restaurant;
   public status: string;
   public errorMessage;
@@ -34,45 +34,54 @@ export class RestaurantAddComponent implements OnInit {
     private _router: Router
   ){}
   /*
-  * onSubmit
-  */
-  onSubmit(){
-    this._restaurantService.addRestaurant(this.restaurant)
-    .subscribe(
-      response => {
-        this.status = response.status;
-        if(this.status !== "success"){
-          alert("Error en el servidor");
-        }
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage !== null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._router.navigate(["Restaurants"]);
-  }
-  /*
   * ngOnInit
   */
   ngOnInit(){
     this.restaurant = new Restaurant(
-      0,
-      this._routeParams.get("name"),
+      parseInt(this._routeParams.get("id")),
+      this._routeParams.get("nombre"),
       this._routeParams.get("address"),
       this._routeParams.get("description"),
       "null",
       this._routeParams.get("price")
     );
+    this.getRestaurant();
   }
   /*
   * callPrice
   */
   callPrice(value){
     this.restaurant.cost = value;
+  }
+  /*
+  * getRestaurant
+  */
+  getRestaurant(){
+    let id = this._routeParams.get("id");
+    this._restaurantService.getRestaurant(id)
+    .subscribe(
+      response => {
+        // this.restaurant = response.data;
+        this.restaurant.name = response.data.nombre;
+        this.restaurant.address = response.data.direccion;
+        this.restaurant.description = response.data.descripcion;
+        this.restaurant.cost = response.data.precio;
+        this.status = response.status;
+
+        if(this.status !== "success"){
+          this._router.navigate(["Restaurants"]);
+        }
+
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage !== null){
+          console.log(this.errorMessage);
+          alert("Request failed");
+        }
+
+      }
+    );
   }
 }

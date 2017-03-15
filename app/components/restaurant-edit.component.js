@@ -10,7 +10,7 @@ System.register(["angular2/core", "../services/restaurant.service", "../model/re
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, restaurant_service_1, restaurant_1, router_1, RestaurantAddComponent;
+    var core_1, restaurant_service_1, restaurant_1, router_1, RestaurantEditComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -30,51 +30,57 @@ System.register(["angular2/core", "../services/restaurant.service", "../model/re
             /*
             * exportamos la clase para que el componente este disponible
             */
-            RestaurantAddComponent = (function () {
+            RestaurantEditComponent = (function () {
                 /*
                 * constructor
                 */
-                function RestaurantAddComponent(_restaurantService, _routeParams, _router) {
+                function RestaurantEditComponent(_restaurantService, _routeParams, _router) {
                     this._restaurantService = _restaurantService;
                     this._routeParams = _routeParams;
                     this._router = _router;
-                    this.title = "Add restaurant";
+                    this.title = "Edit restaurant";
                 }
                 /*
-                * onSubmit
+                * ngOnInit
                 */
-                RestaurantAddComponent.prototype.onSubmit = function () {
+                RestaurantEditComponent.prototype.ngOnInit = function () {
+                    this.restaurant = new restaurant_1.Restaurant(parseInt(this._routeParams.get("id")), this._routeParams.get("nombre"), this._routeParams.get("address"), this._routeParams.get("description"), "null", this._routeParams.get("price"));
+                    this.getRestaurant();
+                };
+                /*
+                * callPrice
+                */
+                RestaurantEditComponent.prototype.callPrice = function (value) {
+                    this.restaurant.cost = value;
+                };
+                /*
+                * getRestaurant
+                */
+                RestaurantEditComponent.prototype.getRestaurant = function () {
                     var _this = this;
-                    this._restaurantService.addRestaurant(this.restaurant)
+                    var id = this._routeParams.get("id");
+                    this._restaurantService.getRestaurant(id)
                         .subscribe(function (response) {
+                        // this.restaurant = response.data;
+                        _this.restaurant.name = response.data.nombre;
+                        _this.restaurant.address = response.data.direccion;
+                        _this.restaurant.description = response.data.descripcion;
+                        _this.restaurant.cost = response.data.precio;
                         _this.status = response.status;
                         if (_this.status !== "success") {
-                            alert("Error en el servidor");
+                            _this._router.navigate(["Restaurants"]);
                         }
                     }, function (error) {
                         _this.errorMessage = error;
                         if (_this.errorMessage !== null) {
                             console.log(_this.errorMessage);
-                            alert("Error en la petición");
+                            alert("Request failed");
                         }
                     });
-                    this._router.navigate(["Restaurants"]);
                 };
-                /*
-                * ngOnInit
-                */
-                RestaurantAddComponent.prototype.ngOnInit = function () {
-                    this.restaurant = new restaurant_1.Restaurant(0, this._routeParams.get("name"), this._routeParams.get("address"), this._routeParams.get("description"), "null", this._routeParams.get("price"));
-                };
-                /*
-                * callPrice
-                */
-                RestaurantAddComponent.prototype.callPrice = function (value) {
-                    this.restaurant.cost = value;
-                };
-                return RestaurantAddComponent;
+                return RestaurantEditComponent;
             }());
-            RestaurantAddComponent = __decorate([
+            RestaurantEditComponent = __decorate([
                 core_1.Component({
                     templateUrl: "app/views/restaurant-add.html",
                     providers: [restaurant_service_1.RestaurantService]
@@ -86,9 +92,9 @@ System.register(["angular2/core", "../services/restaurant.service", "../model/re
                 __metadata("design:paramtypes", [restaurant_service_1.RestaurantService,
                     router_1.RouteParams,
                     router_1.Router])
-            ], RestaurantAddComponent);
-            exports_1("RestaurantAddComponent", RestaurantAddComponent);
+            ], RestaurantEditComponent);
+            exports_1("RestaurantEditComponent", RestaurantEditComponent);
         }
     };
 });
-//# sourceMappingURL=restaurant-add.component.js.map
+//# sourceMappingURL=restaurant-edit.component.js.map

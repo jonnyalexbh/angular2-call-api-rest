@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./components/restaurants-list.component", "./components/restaurant-detail.component", "./components/restaurant-add.component", "angular2/router"], function (exports_1, context_1) {
+System.register(["angular2/core", "./components/restaurants-list.component", "./components/restaurant-detail.component", "./components/restaurant-add.component", "./components/restaurant-edit.component", "angular2/router"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["angular2/core", "./components/restaurants-list.component", "./
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, restaurants_list_component_1, restaurant_detail_component_1, restaurant_add_component_1, router_1, AppComponent;
+    var core_1, restaurants_list_component_1, restaurant_detail_component_1, restaurant_add_component_1, restaurant_edit_component_1, router_1, AppComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -21,6 +21,9 @@ System.register(["angular2/core", "./components/restaurants-list.component", "./
             },
             function (restaurant_add_component_1_1) {
                 restaurant_add_component_1 = restaurant_add_component_1_1;
+            },
+            function (restaurant_edit_component_1_1) {
+                restaurant_edit_component_1 = restaurant_edit_component_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -60,7 +63,8 @@ System.register(["angular2/core", "./components/restaurants-list.component", "./
                 router_1.RouteConfig([
                     { path: '/', name: "Restaurants", component: restaurants_list_component_1.RestaurantsListComponent, useAsDefault: true },
                     { path: '/restaurant/:id', name: "Restaurant", component: restaurant_detail_component_1.RestaurantDetailComponent },
-                    { path: '/restaurant-add', name: "RestaurantAdd", component: restaurant_add_component_1.RestaurantAddComponent }
+                    { path: '/restaurant-add', name: "RestaurantAdd", component: restaurant_add_component_1.RestaurantAddComponent },
+                    { path: '/restaurant-edit/:id', name: "RestaurantEdit", component: restaurant_edit_component_1.RestaurantEditComponent }
                 ])
                 /*
                 * exportamos la clase para que el componente este disponible

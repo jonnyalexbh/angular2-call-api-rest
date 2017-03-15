@@ -1,4 +1,4 @@
-<h1>Add new restaurant</h1>
+<h1>{{title}}</h1>
 
 <form #myForm="ngForm" (ngSubmit)="onSubmit()">
   <label>Name:</label>
@@ -19,10 +19,10 @@
   <label>Price:</label>
   <p>
     <select #price (change)="callPrice(price.value)">
-      <option value="bajo">small</option>
-      <option value="normal">normal</option>
-      <option value="alto">high</option>
+      <option value="bajo" [attr.selected]="restaurant.cost === 'small' ? 'selected' : null">small</option>
+      <option value="normal" [attr.selected]="restaurant.cost === 'normal' ? 'selected' : null">normal</option>
+      <option value="alto" [attr.selected]="restaurant.cost === 'high' ? 'selected' : null">high</option>
     </select>
   </p>
-  <input type="submit" value="add movie" [disabled]="!myForm.form.valid">
+  <input type="submit" value="{{title}}" [disabled]="!myForm.form.valid">
 </form>
