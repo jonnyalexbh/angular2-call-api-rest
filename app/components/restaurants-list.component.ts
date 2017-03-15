@@ -27,6 +27,7 @@ export class RestaurantsListComponent {
   public restaurants:Restaurant[];
   public status: string;
   public errorMessage;
+  public confirm;
 
   constructor(private _restaurantService:RestaurantService){
 
@@ -53,6 +54,44 @@ export class RestaurantsListComponent {
 
         box_restaurantes.style.display = "none";
 
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage !== null){
+          console.log(this.errorMessage);
+          alert("Request failed");
+        }
+
+      }
+
+    );
+  }
+  /*
+  * onDeleteConfirm
+  */
+  onDeleteConfirm(id){
+    this.confirm = id;
+  }
+  /*
+  * onCancel
+  */
+  onCancel(id){
+    this.confirm = null;
+  }
+  /*
+  * onDeleteRestaurant
+  */
+  onDeleteRestaurant(id){
+    this._restaurantService.deleteRestaurant(id)
+    .subscribe(
+      result => {
+        this.status = result.status
+
+        if(this.status !== "success"){
+          alert("Server error");
+        }
+        this.getRestaurants();
       },
       error => {
         this.errorMessage = <any>error;

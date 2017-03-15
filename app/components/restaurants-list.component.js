@@ -56,6 +56,38 @@ System.register(["angular2/core", "../services/restaurant.service", "angular2/ro
                         }
                     });
                 };
+                /*
+                * onDeleteConfirm
+                */
+                RestaurantsListComponent.prototype.onDeleteConfirm = function (id) {
+                    this.confirm = id;
+                };
+                /*
+                * onCancel
+                */
+                RestaurantsListComponent.prototype.onCancel = function (id) {
+                    this.confirm = null;
+                };
+                /*
+                * onDeleteRestaurant
+                */
+                RestaurantsListComponent.prototype.onDeleteRestaurant = function (id) {
+                    var _this = this;
+                    this._restaurantService.deleteRestaurant(id)
+                        .subscribe(function (result) {
+                        _this.status = result.status;
+                        if (_this.status !== "success") {
+                            alert("Server error");
+                        }
+                        _this.getRestaurants();
+                    }, function (error) {
+                        _this.errorMessage = error;
+                        if (_this.errorMessage !== null) {
+                            console.log(_this.errorMessage);
+                            alert("Request failed");
+                        }
+                    });
+                };
                 return RestaurantsListComponent;
             }());
             RestaurantsListComponent = __decorate([

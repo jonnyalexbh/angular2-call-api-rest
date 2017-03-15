@@ -45,4 +45,11 @@ export class RestaurantService{
     return this._http.post("http://localhost/api-rest-slim/restaurantes-api.php/update-restaurante/"+id,
     params, {headers: headers}).map(res => res.json());
   }
+  /*
+  * deleteRestaurant
+  */
+  deleteRestaurant(id: string){
+    return this._http.get("http://localhost/api-rest-slim/restaurantes-api.php/delete-restaurante/"+id)
+    .map(res => res.json());
+  }
 }

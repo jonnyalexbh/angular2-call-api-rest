@@ -12,8 +12,12 @@
       <p>
         <a [routerLink]="['Restaurant', {id: row.id}]" class="btn btn-show">Show</a>
         <a [routerLink]="['RestaurantEdit', {id: row.id}]" class="btn btn-edit">Edit</a>
-        <a href="#" class="btn btn-delete">Delete</a>
+        <a (click)="onDeleteConfirm(row.id)" class="btn btn-delete">Delete</a>
       </p>
+      <div class="secure" *ngIf="confirm === row.id">
+        <a (click)="onDeleteRestaurant(row.id)" class="btn btn-delete">Delete</a>
+        <a (click)="onCancel(row.id)" class="btn btn-show">Cancel</a>
+      </div>
     </div>
     <div class="clearfix"></div>
   </li>
