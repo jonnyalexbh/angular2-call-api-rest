@@ -63,7 +63,13 @@ System.register(["angular2/core", "../services/restaurant.service", "../model/re
                 * ngOnInit
                 */
                 RestaurantAddComponent.prototype.ngOnInit = function () {
-                    this.restaurant = new restaurant_1.Restaurant(0, this._routeParams.get("name"), this._routeParams.get("address"), this._routeParams.get("description"), "null", "small");
+                    this.restaurant = new restaurant_1.Restaurant(0, this._routeParams.get("name"), this._routeParams.get("address"), this._routeParams.get("description"), "null", this._routeParams.get("price"));
+                };
+                /*
+                * ngOnInit
+                */
+                RestaurantAddComponent.prototype.callPrice = function (value) {
+                    this.restaurant.cost = value;
                 };
                 return RestaurantAddComponent;
             }());

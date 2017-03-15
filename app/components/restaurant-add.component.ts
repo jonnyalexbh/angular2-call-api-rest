@@ -65,7 +65,13 @@ export class RestaurantAddComponent implements OnInit {
       this._routeParams.get("address"),
       this._routeParams.get("description"),
       "null",
-      "small"
+      this._routeParams.get("price")
     );
+  }
+  /*
+  * ngOnInit
+  */
+  callPrice(value){
+    this.restaurant.cost = value;
   }
 }
