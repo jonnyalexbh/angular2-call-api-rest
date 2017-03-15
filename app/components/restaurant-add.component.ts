@@ -33,6 +33,29 @@ export class RestaurantAddComponent implements OnInit {
     private _router: Router
   ){}
   /*
+  * onSubmit
+  */
+  onSubmit(){
+    this._restaurantService.addRestaurant(this.restaurant)
+    .subscribe(
+      response => {
+        this.status = response.status;
+        if(this.status !== "success"){
+          alert("Error en el servidor");
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage !== null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._router.navigate(["Restaurants"]);
+  }
+  /*
   * ngOnInit
   */
   ngOnInit(){
@@ -44,6 +67,5 @@ export class RestaurantAddComponent implements OnInit {
       "null",
       "small"
     );
-    console.log("Component restaurant add");
   }
 }

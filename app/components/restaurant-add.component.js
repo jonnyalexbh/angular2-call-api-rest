@@ -40,11 +40,30 @@ System.register(["angular2/core", "../services/restaurant.service", "../model/re
                     this._router = _router;
                 }
                 /*
+                * onSubmit
+                */
+                RestaurantAddComponent.prototype.onSubmit = function () {
+                    var _this = this;
+                    this._restaurantService.addRestaurant(this.restaurant)
+                        .subscribe(function (response) {
+                        _this.status = response.status;
+                        if (_this.status !== "success") {
+                            alert("Error en el servidor");
+                        }
+                    }, function (error) {
+                        _this.errorMessage = error;
+                        if (_this.errorMessage !== null) {
+                            console.log(_this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    });
+                    this._router.navigate(["Restaurants"]);
+                };
+                /*
                 * ngOnInit
                 */
                 RestaurantAddComponent.prototype.ngOnInit = function () {
                     this.restaurant = new restaurant_1.Restaurant(0, this._routeParams.get("name"), this._routeParams.get("address"), this._routeParams.get("description"), "null", "small");
-                    console.log("Component restaurant add");
                 };
                 return RestaurantAddComponent;
             }());
