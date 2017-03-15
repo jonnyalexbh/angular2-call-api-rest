@@ -34,12 +34,36 @@ export class RestaurantEditComponent implements OnInit {
     private _router: Router
   ){}
   /*
+  * onSubmit
+  */
+  onSubmit(){
+    let id = this._routeParams.get("id");
+    this._restaurantService.editRestaurant(id, this.restaurant)
+    .subscribe(
+      response => {
+        this.status = response.status;
+        if(this.status !== "success"){
+          alert("Error en el servidor");
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage !== null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._router.navigate(["Restaurants"]);
+  }
+  /*
   * ngOnInit
   */
   ngOnInit(){
     this.restaurant = new Restaurant(
       parseInt(this._routeParams.get("id")),
-      this._routeParams.get("nombre"),
+      this._routeParams.get("name"),
       this._routeParams.get("address"),
       this._routeParams.get("description"),
       "null",

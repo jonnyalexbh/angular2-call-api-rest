@@ -41,10 +41,31 @@ System.register(["angular2/core", "../services/restaurant.service", "../model/re
                     this.title = "Edit restaurant";
                 }
                 /*
+                * onSubmit
+                */
+                RestaurantEditComponent.prototype.onSubmit = function () {
+                    var _this = this;
+                    var id = this._routeParams.get("id");
+                    this._restaurantService.editRestaurant(id, this.restaurant)
+                        .subscribe(function (response) {
+                        _this.status = response.status;
+                        if (_this.status !== "success") {
+                            alert("Error en el servidor");
+                        }
+                    }, function (error) {
+                        _this.errorMessage = error;
+                        if (_this.errorMessage !== null) {
+                            console.log(_this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    });
+                    this._router.navigate(["Restaurants"]);
+                };
+                /*
                 * ngOnInit
                 */
                 RestaurantEditComponent.prototype.ngOnInit = function () {
-                    this.restaurant = new restaurant_1.Restaurant(parseInt(this._routeParams.get("id")), this._routeParams.get("nombre"), this._routeParams.get("address"), this._routeParams.get("description"), "null", this._routeParams.get("price"));
+                    this.restaurant = new restaurant_1.Restaurant(parseInt(this._routeParams.get("id")), this._routeParams.get("name"), this._routeParams.get("address"), this._routeParams.get("description"), "null", this._routeParams.get("price"));
                     this.getRestaurant();
                 };
                 /*

@@ -50,6 +50,15 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
                     var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
                     return this._http.post("http://localhost/api-rest-slim/restaurantes-api.php/restaurantes", params, { headers: headers }).map(function (res) { return res.json(); });
                 };
+                /*
+                * editRestaurant
+                */
+                RestaurantService.prototype.editRestaurant = function (id, restaurant) {
+                    var json = JSON.stringify(restaurant);
+                    var params = "json=" + json;
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+                    return this._http.post("http://localhost/api-rest-slim/restaurantes-api.php/update-restaurante/" + id, params, { headers: headers }).map(function (res) { return res.json(); });
+                };
                 return RestaurantService;
             }());
             RestaurantService = __decorate([
